@@ -56,7 +56,6 @@ class TestRegistration < Test::Unit::TestCase
     expected_text = 'Successful creation.'
     actual_text = @driver.find_element(:id, 'flash_notice').text
     assert_equal(expected_text, actual_text)
-    sleep 10
   end
 
 def test_create_project_version
@@ -102,10 +101,8 @@ end
 
   def register_user
     @driver.navigate.to 'http://demo.redmine.org'
-
     @driver.find_element(:class, 'register').click
     @wait.until {@driver.find_element(:id, 'user_login').displayed? }
-
     @login = ('login' + rand(99999).to_s)
     @driver.find_element(:id, 'user_login').send_keys @login
     @driver.find_element(:id, 'user_password').send_keys 'Password1'
