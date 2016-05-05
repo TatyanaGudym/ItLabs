@@ -8,7 +8,6 @@ module CreateSupport
     #@driver.find_element(:css,"option[value='3']").click
 
     select = Selenium::WebDriver::Support::Select.new(@driver.find_element(:id, 'issue_tracker_id'))
-    @wait.until {@driver.find_element(:text, "Support").displayed? }
     select.select_by(:text, "Support")
     @driver.find_element(:id, 'issue_subject').send_keys 'This is new Support issue'
     @driver.find_element(:name, 'commit').click
