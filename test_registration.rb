@@ -22,7 +22,6 @@ class TestRegistration < Test::Unit::TestCase
   include CreateFeature
   include CreateSupport
 
-
   def setup
     @driver = Selenium::WebDriver.for :firefox
     @wait = Selenium::WebDriver::Wait.new(:timeout => 10)
@@ -46,7 +45,7 @@ class TestRegistration < Test::Unit::TestCase
     test_logout
     login
     logout_button = @driver.find_element(:class, 'logout')
-    assert (logout_button.displayed?)
+    assert(logout_button.displayed?)
   end
 
   def test_change_password
@@ -68,28 +67,32 @@ class TestRegistration < Test::Unit::TestCase
 def test_create_project_version
   test_create_new_project
   create_project_version
-  assert{@driver.find_element(:link, @new_version_name).displayed?}
+  assert(@driver.find_element(:link, @new_version_name).displayed?)
 end
 
   def test_create_bug_issue
     test_create_new_project
     create_bug_issue
     @driver.find_element(:link, 'View all issues').click
-    assert{@driver.find_element(:link, 'This is new Bug issue').displayed?}
+    @wait.until {@driver.find_element(:link, 'This is new Bug issue').displayed? }
+    assert(@driver.find_element(:link, 'This is new Bug issue').displayed?)
   end
+
 
   def test_create_feature
     test_create_new_project
     create_feature
     @driver.find_element(:link, 'View all issues').click
-    assert{@driver.find_element(:link, 'This is new Feature issue').displayed?}
+    @wait.until {@driver.find_element(:link, 'This is new Feature issue').displayed? }
+    assert(@driver.find_element(:link, 'This is new Feature issue').displayed?)
   end
 
   def test_create_support
     test_create_new_project
     create_support
     @driver.find_element(:link, 'View all issues').click
-    assert{@driver.find_element(:link, 'This is new Support issue').displayed?}
+    @wait.until {@driver.find_element(:link, 'This is new Support issue').displayed? }
+    assert(@driver.find_element(:link, 'This is new Support issue').displayed?)
   end
 
 
