@@ -5,7 +5,7 @@ module CreateFeature
     #@driver.find_element(:id, 'issue_tracker_id').click
     #@driver.find_element(:css,"option[value='2']").click
     select = Selenium::WebDriver::Support::Select.new(@driver.find_element(:id, 'issue_tracker_id'))
-    @wait.until {@driver.find_element(:text, "Feature").displayed? }
+    #@wait.until {@driver.find_element(:text, "Feature").displayed? }
     select.select_by(:text, "Feature")
     @wait.until {@driver.find_element(:id, 'issue_subject').displayed? }
     @driver.find_element(:id, 'issue_subject').send_keys 'This is new Feature issue'
