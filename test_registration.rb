@@ -42,7 +42,8 @@ class TestRegistration < Test::Unit::TestCase
    end
 
   def test_login
-    test_logout
+    register_user
+    logout
     login
     logout_button = @driver.find_element(:class, 'logout')
     assert(logout_button.displayed?)
@@ -65,13 +66,15 @@ class TestRegistration < Test::Unit::TestCase
   end
 
 def test_create_project_version
-  test_create_new_project
+  register_user
+  create_new_project
   create_project_version
   assert(@driver.find_element(:link, @new_version_name).displayed?)
 end
 
   def test_create_bug_issue
-    test_create_new_project
+    register_user
+    create_new_project
     create_bug_issue
     @driver.find_element(:link, 'View all issues').click
     @wait.until {@driver.find_element(:link, 'This is new Bug issue').displayed? }
@@ -80,7 +83,8 @@ end
 
 
   def test_create_feature
-    test_create_new_project
+    register_user
+    create_new_project
     create_feature
     @driver.find_element(:link, 'View all issues').click
     @wait.until {@driver.find_element(:link, 'This is new Feature issue').displayed? }
@@ -88,13 +92,13 @@ end
   end
 
   def test_create_support
-    test_create_new_project
+    register_user
+    create_new_project
     create_support
     @driver.find_element(:link, 'View all issues').click
     @wait.until {@driver.find_element(:link, 'This is new Support issue').displayed? }
     assert(@driver.find_element(:link, 'This is new Support issue').displayed?)
   end
-
 
   def teardown
   @driver.quit
