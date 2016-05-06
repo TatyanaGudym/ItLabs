@@ -1,26 +1,9 @@
 require 'test/unit'
 require 'selenium-webdriver'
-require_relative 'registration'
-require_relative 'create_new_project'
-require_relative 'logout'
-require_relative 'login'
-require_relative 'change_password'
-require_relative 'create_project_version'
-require_relative 'create_bug_issue'
-require_relative 'createfeature'
-require_relative 'create_support'
-
+require_relative 'HelperMethods'
 
 class TestRegistration < Test::Unit::TestCase
-  include Registration
-  include CreateNewProject
-  include Logout
-  include Login
-  include ChangePassword
-  include CreateProjectVersion
-  include CreateBugIssue
-  include CreateFeature
-  include CreateSupport
+  include HelperMethods
 
   def setup
     @driver = Selenium::WebDriver.for :firefox
