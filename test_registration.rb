@@ -12,9 +12,10 @@ class TestRegistration < Test::Unit::TestCase
 
   def test_registration
     register_user
-    expected_text = 'Your account has been activated. You can now log in.'
+    expected_text_en = 'Your account has been activated. You can now log in.'
+    expected_text_ru = 'Ваша учётная запись активирована. Вы можете войти.'
     actual_text = @driver.find_element(:id, 'flash_notice').text
-    assert_equal(expected_text, actual_text)
+    assert(actual_text.include?(expected_text_en) || actual_text.include?(expected_text_ru))
   end
 
    def test_logout
@@ -35,17 +36,19 @@ class TestRegistration < Test::Unit::TestCase
   def test_change_password
     register_user
     change_password
-    expected_text = 'Password was successfully updated.'
+    expected_text_en = 'Password was successfully updated.'
+    expected_text_ru = 'Пароль успешно обновлён.'
     actual_text = @driver.find_element(:id, 'flash_notice').text
-    assert_equal(expected_text, actual_text)
+    assert(actual_text.include?(expected_text_en) || actual_text.include?(expected_text_ru))
   end
 
   def test_create_new_project
     register_user
     create_new_project
-    expected_text = 'Successful creation.'
+    expected_text_en = 'Successful creation.'
+    expected_text_ru = 'Создание успешно.'
     actual_text = @driver.find_element(:id, 'flash_notice').text
-    assert_equal(expected_text, actual_text)
+    assert(actual_text.include?(expected_text_en) || actual_text.include?(expected_text_ru))
   end
 
 def test_create_project_version
@@ -59,8 +62,7 @@ end
     register_user
     create_new_project
     create_bug_issue
-    @driver.find_element(:link, 'View all issues').click
-    @wait.until {@driver.find_element(:link, 'This is new Bug issue').displayed? }
+    @driver.find_element(:class, 'issues').click
     assert(@driver.find_element(:link, 'This is new Bug issue').displayed?)
   end
 
@@ -69,8 +71,7 @@ end
     register_user
     create_new_project
     create_feature
-    @driver.find_element(:link, 'View all issues').click
-    @wait.until {@driver.find_element(:link, 'This is new Feature issue').displayed? }
+    @driver.find_element(:class, 'issues').click
     assert(@driver.find_element(:link, 'This is new Feature issue').displayed?)
   end
 
@@ -78,8 +79,7 @@ end
     register_user
     create_new_project
     create_support
-    @driver.find_element(:link, 'View all issues').click
-    @wait.until {@driver.find_element(:link, 'This is new Support issue').displayed? }
+    @driver.find_element(:class, 'issues').click
     assert(@driver.find_element(:link, 'This is new Support issue').displayed?)
   end
 
