@@ -1,0 +1,7 @@
+*.idea
+.bundle/
+.DS_Store
+*.CFUserTextEncoding
+*.DS_Store
+*.Trash
+*.bash_history
