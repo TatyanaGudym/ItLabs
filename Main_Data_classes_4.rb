@@ -14,6 +14,6 @@ def find_number_of_first_matching_chars (str1, str2)
     counter = counter + 1
   end
 
-  return counter
+  counter
 end
 
