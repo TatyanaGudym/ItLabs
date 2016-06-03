@@ -11,39 +11,44 @@ def gets_random_10
 
   count = 0
 
-while count < 10
-  num = rand(9)
- first_string = "=========" + " #{num}"
+  while count < 10
+    @num = rand(9)
+    divider = "========="
 
-  if num.odd?  and num!=0
-    result = first_string + " the number is odd"
-     if num < 5
-       puts result + " the number is less than 5"
-       elsif num > 5
-         puts result + " the number is more than 5"
-        else
-       puts result + " the number is 5"
+    case
+    when @num.odd? && @num!=0
+      @result = "#{@num}" + " the number is odd"
+      puts divider
+      check_if_five_exists
+    when @num.even? && @num!=0
+      puts divider
+      @result = "#{@num}" + " the number is even"
+      check_if_five_exists
+    when @num == 0
+      puts divider
+      puts "#{@num}" + " we've got 0"
+    else
+      puts "I can't guess the number"
     end
-    elsif num.even?  and num!=0
-      result = first_string + " the number is even"
-      if num < 5
-        puts result + " the number is less than 5"
-      elsif num > 5
-        puts result + " the number is more than 5"
-      else
-        puts result + " the number is 5"
-      end
-  elsif num == 0
-       puts first_string + " we've got 0"
-  else
-  puts "I can't guess the number"
-  end
 
-  count += 1
+    count += 1
+  end
 end
+
+
+def check_if_five_exists
+  if @num < 5
+    puts @result + " the number is less than 5"
+  elsif @num > 5
+    puts @result + " the number is more than 5"
+  else
+    puts @result + " the number is 5"
+  end
 end
+
 
 gets_random_10
+
 
 
 
