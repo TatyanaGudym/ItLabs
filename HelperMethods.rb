@@ -90,4 +90,22 @@ module HelperMethods
     @driver.find_element(:name, 'commit').click
 
   end
-end
+
+  def check_watchers
+    if @driver.find_elements(:class,'nodata').empty?
+      @driver.find_element(:link, "This is new Bug issue").click
+      add_viewer
+    else
+      create_bug_issue
+      add_viewer
+    end
+  end
+
+  def add_viewer
+    @driver.find_element(:class, 'contextual').click
+    @wait.until {@driver.find_element(:class, 'ui-dialog-title').displayed?}
+    @driver.find_element(:name, 'watcher[user_ids][]').click
+    @driver.find_element(:css, '.buttons> *:first-child').click
+  end
+
+  end
