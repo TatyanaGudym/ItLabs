@@ -2,6 +2,7 @@ require 'test/unit'
 require 'selenium-webdriver'
 require_relative 'HelperMethods'
 
+
 class TestRegistration < Test::Unit::TestCase
   include HelperMethods
 
@@ -55,7 +56,9 @@ def test_create_project_version
   register_user
   create_new_project
   create_project_version
-  assert(@driver.find_element(:link, @new_version_name).displayed?)
+  #sleep 30
+  project_new = @project.new_version_name
+  assert(@driver.find_element(:link, project_new).displayed?)
 end
 
   def test_create_bug_issue
@@ -82,6 +85,7 @@ end
     @driver.find_element(:class, 'issues').click
     assert(@driver.find_element(:link, 'This is new Support issue').displayed?)
   end
+
 
   def teardown
   @driver.quit
