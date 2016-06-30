@@ -2,7 +2,7 @@ require 'faker'
 
 class Users
 
-  attr_reader :first_name, :users
+  attr_accessor :first_name, :users
 
   def initialize
     @first_name = Faker::Name.first_name
@@ -19,14 +19,5 @@ class Users
     string << "--------------------------\n"
     string
   end
-
-  def add_new_user(first_name)
-    new_user = Users.new
-    @first_name = first_name
-    @users << new_user
-  end
-
-
-
 
 end
