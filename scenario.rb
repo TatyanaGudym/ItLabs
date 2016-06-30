@@ -16,16 +16,10 @@ require_relative "users"
 
 #create new user
 user = Users.new
-user.users << user
-puts user.users
-
-
-# add new user with a name and puts the list of all users
-new_user = user.add_new_user("Tanya")
 puts "========================"
-puts "ALL USERS"
+puts "USER"
 puts "========================"
-puts user.users
+puts user
 
 #create new team
 team = Team.new
@@ -35,9 +29,17 @@ puts "========================"
 puts team
 
 #add user to the team
-new_team_user = team.add_user_to_team(new_user)
+team.members << user
 puts "========================"
 puts "TEAM MEMBERS"
+puts "========================"
+puts team.members
+
+
+# add new user with a name and puts the list of all users
+team.add_new_user('Tanya')
+puts "========================"
+puts "ALL USERS IN THE TEAM"
 puts "========================"
 puts team.members
 
@@ -65,36 +67,44 @@ puts done_list
 
 #create new card
 card = Cards.new
-card.cards << card
+list.cards << card
 puts "========================"
 puts "CARDS"
 puts "========================"
-puts card.cards
+puts list.cards
 
 #create new card for the first list
-new_card = card.create_new_card(list)
+new_card = list.create_new_card_for_list(list)
+list.cards << new_card
 puts "========================"
 puts "CARDs with NEW"
 puts "========================"
-puts card.cards
-
-
-#move card to other done_list
-card.move_to_another_list(done_list)
-
-
-#show cards in done_list
-puts "========================"
-puts "CARDS in DONE"
-puts "========================"
-card.show_cards_in_list(done_list)
-
+puts list.cards
 
 #show crads in initial list
 puts "========================"
 puts "CARDS in INITIAL LIST"
 puts "========================"
-card.show_cards_in_list(list)
+list.show_cards_in_list(list)
+
+
+#move card to other done_list
+new_card.move_card_to_another_list(done_list)
+puts "========================"
+puts "CARD was moved from initial to done"
+puts "========================"
+
+#show cards in done_list
+puts "========================"
+puts "CARDS in DONE"
+puts "========================"
+list.show_cards_in_list(done_list)
+
+#show crads in initial list
+puts "========================"
+puts "CARDS in INITIAL LIST"
+puts "========================"
+list.show_cards_in_list(list)
 
 
 
