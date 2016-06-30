@@ -3,6 +3,25 @@ module HelperMethods
   require_relative "users"
   require_relative "project"
 
+
+  def register_user
+    @driver.navigate.to 'http://demo.redmine.org'
+
+    @driver.find_element(:class, 'register').click
+    @wait.until {@driver.find_element(:id, 'new_user').displayed? }
+    @login = @user.username
+    @password = @user.password
+    @driver.find_element(:id, 'user_login').send_keys @login
+    @driver.find_element(:id, 'user_password').send_keys @password
+    @driver.find_element(:id, 'user_password_confirmation').send_keys @password
+    @driver.find_element(:id, 'user_firstname').send_keys @user.first_name
+    @driver.find_element(:id, 'user_lastname').send_keys @user.last_name
+    @driver.find_element(:id, 'user_mail').send_keys @user.email
+    @driver.find_element(:name, 'commit').click
+
+  end
+
+
   def create_new_project
     @driver.find_element(:class, 'projects').click
     @driver.find_element(:class, 'icon-add').click
@@ -32,10 +51,8 @@ module HelperMethods
     @driver.find_element(:class, 'icon-passwd').click
     @wait.until {@driver.find_element(:css, '.controller-my.action-password').displayed? }
     @driver.find_element(:id, 'password').send_keys @password
-    user = Users.new
-    new_password = user.password
-    @driver.find_element(:id, 'new_password').send_keys new_password
-    @driver.find_element(:id, 'new_password_confirmation').send_keys new_password
+    @driver.find_element(:id, 'new_password').send_keys 'Password1'
+    @driver.find_element(:id, 'new_password_confirmation').send_keys 'Password1'
     @driver.find_element(:name, 'commit').click
   end
 
@@ -69,7 +86,6 @@ module HelperMethods
   def login
     @driver.find_element(:class, 'login').click
     @wait.until {@driver.find_element(:id, 'login-form').displayed? }
-    user = Users.new
     @driver.find_element(:id, 'username').send_keys @login
     @driver.find_element(:id, 'password').send_keys @password
     @driver.find_element(:name, 'login').click
@@ -80,24 +96,6 @@ module HelperMethods
     @wait.until {@driver.find_element(:class, 'register').displayed? }
   end
 
-  def register_user
-    @driver.navigate.to 'http://demo.redmine.org'
-
-    @driver.find_element(:class, 'register').click
-    @wait.until {@driver.find_element(:id, 'new_user').displayed? }
-    #@login = ('login' + rand(99999).to_s)
-    user = Users.new
-    @login = user.username
-    @password = user.password
-    @driver.find_element(:id, 'user_login').send_keys @login
-    @driver.find_element(:id, 'user_password').send_keys @password
-    @driver.find_element(:id, 'user_password_confirmation').send_keys @password
-    @driver.find_element(:id, 'user_firstname').send_keys user.first_name
-    @driver.find_element(:id, 'user_lastname').send_keys user.last_name
-    @driver.find_element(:id, 'user_mail').send_keys user.email
-    @driver.find_element(:name, 'commit').click
-
-  end
 
   def check_watchers
     if @driver.find_elements(:class,'nodata').empty?
