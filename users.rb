@@ -1,6 +1,6 @@
 require 'faker'
 
-class Users
+class User
 
   attr_reader :users, :first_name, :password, :username, :last_name, :email
 
@@ -10,7 +10,6 @@ class Users
     @last_name = Faker::Name.last_name
     @password = Faker::Internet.password
     @email = Faker::Internet.email(@first_name)
-    @users = []
   end
 
 
