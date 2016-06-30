@@ -9,6 +9,7 @@ class TestRegistration < Test::Unit::TestCase
   def setup
     @driver = Selenium::WebDriver.for :firefox
     @wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    @user = User.new
   end
 
   def test_registration
@@ -56,7 +57,6 @@ def test_create_project_version
   register_user
   create_new_project
   create_project_version
-  #sleep 30
   project_new = @project.new_version_name
   assert(@driver.find_element(:link, project_new).displayed?)
 end
