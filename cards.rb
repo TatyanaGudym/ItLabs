@@ -7,7 +7,7 @@ class Cards
   def initialize
     @card_name =  Faker::Lorem.sentence
     @checklist_item = Faker::Lorem.sentence
-    @current_list = []
+    @current_list = 0
     @checklist = []
     @comments = []
   end
@@ -21,8 +21,7 @@ class Cards
 
 
   def add_checklist(string)
-    checklist_item = string
-    @checklist << checklist_item
+    @checklist << string
   end
 
   def add_new_comment(comment)
