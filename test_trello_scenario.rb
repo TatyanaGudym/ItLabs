@@ -33,6 +33,7 @@ def test_create_user
   puts "========================"
   puts "USER"
   puts "========================"
+  assert(@user.is_a? Users)
   puts @user
 end
 
@@ -51,6 +52,7 @@ end
 puts "========================"
 puts "TEAM MEMBERS"
 puts "========================"
+assert(@team.members.include?(@user))
 puts @team.members
 end
 
@@ -61,6 +63,7 @@ def test_named_user
 puts "========================"
 puts "ALL USERS IN THE TEAM"
 puts "========================"
+  assert(@team.members.any? { |user| user.first_name == "Tanya" })
 puts @team.members
 end
 
@@ -96,6 +99,7 @@ end
 puts "========================"
 puts "CARDS"
 puts "========================"
+assert(@list.cards.include?(@card))
 puts @list.cards
 end
 
@@ -106,6 +110,7 @@ end
 puts "========================"
 puts "CARDs with NEW"
 puts "========================"
+    assert(@list.cards.include?(@new_card))
 puts @list.cards
 end
 
@@ -117,6 +122,7 @@ puts "========================"
 @new_card
 @list.cards << @new_card
 @list.show_cards_in_list(@list)
+assert(@list.cards.any? { |card| card.current_list == @list })
 end
 
 
@@ -126,6 +132,7 @@ def test_move_card_to_done_list
 puts "========================"
 puts "CARD was moved from initial to done"
 puts "========================"
+  assert(@new_card.current_list == @done_list)
 end
 
 
@@ -135,6 +142,7 @@ new_checklist = @card.add_checklist("Hello checklist!")
 puts "========================"
 puts "Checklists"
 puts "========================"
+assert(@card.checklist.include?("Hello checklist!"))
 puts @card.checklist
 end
 
@@ -145,6 +153,7 @@ end
 puts "========================"
 puts "Comments"
 puts "========================"
+assert(@card.comments.include?("Hello this is comment"))
 puts @card.comments
 end
 
@@ -156,6 +165,7 @@ end
 puts "========================"
 puts "Comments after delete"
 puts "========================"
+    assert(@card.comments.empty?)
 puts @card.comments
   end
 
