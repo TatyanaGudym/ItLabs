@@ -57,7 +57,7 @@ def test_create_project_version
   register_user
   create_new_project
   create_project_version
-  project_new = @project.new_version_name
+  project_new = @project.version_name
   assert(@driver.find_element(:link, project_new).displayed?)
 end
 
