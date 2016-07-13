@@ -2,7 +2,7 @@ require 'faker'
 
 class User
 
-  attr_reader :users, :first_name, :password, :username, :last_name, :email
+  attr_reader  :first_name, :password, :username, :last_name, :email
 
   def initialize
     @username = Faker::Name.first_name
