@@ -27,7 +27,7 @@ module HelperMethods
     @driver.find_element(:class, 'icon-add').click
     @wait.until {@driver.find_element(:id, 'new_project').displayed? }
     project = Project.new
-    @driver.find_element(:id, 'project_name').send_keys project.project_name
+    @driver.find_element(:id, 'project_name').send_keys project.name
     @driver.find_element(:id, 'project_identifier').send_keys project.identifier
     @driver.find_element(:name, 'commit').click
   end
@@ -68,7 +68,7 @@ module HelperMethods
     @driver.find_element(:css, '#tab-content-versions .icon-add').click
     @wait.until {@driver.find_element(:id, 'new_version').displayed?}
     @project = Project.new
-    @driver.find_element(:id, 'version_name').send_keys @project.new_version_name
+    @driver.find_element(:id, 'version_name').send_keys @project.version_name
     @driver.find_element(:name, 'commit').click
   end
 
