@@ -8,8 +8,6 @@ class Users
     @first_name = Faker::Name.first_name
     @email = Faker::Internet.email(@first_name)
     @password = Faker::Internet.password
-    @users = []
-
   end
 
   def to_s
@@ -19,5 +17,10 @@ class Users
     string << "--------------------------\n"
     string
   end
+
+
+
+
+
 
 end
