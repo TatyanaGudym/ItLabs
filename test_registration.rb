@@ -2,12 +2,14 @@ require 'test/unit'
 require 'selenium-webdriver'
 require_relative 'HelperMethods'
 
+
 class TestRegistration < Test::Unit::TestCase
   include HelperMethods
 
   def setup
     @driver = Selenium::WebDriver.for :firefox
     @wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    @user = User.new
   end
 
   def test_registration
@@ -55,7 +57,8 @@ def test_create_project_version
   register_user
   create_new_project
   create_project_version
-  assert(@driver.find_element(:link, @new_version_name).displayed?)
+  project_new = @project.version_name
+  assert(@driver.find_element(:link, project_new).displayed?)
 end
 
   def test_create_bug_issue
@@ -82,6 +85,7 @@ end
     @driver.find_element(:class, 'issues').click
     assert(@driver.find_element(:link, 'This is new Support issue').displayed?)
   end
+
 
   def teardown
   @driver.quit
