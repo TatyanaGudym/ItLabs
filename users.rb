@@ -17,10 +17,4 @@ class Users
     string << "--------------------------\n"
     string
   end
-
-
-
-
-
-
 end
